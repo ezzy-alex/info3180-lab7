@@ -12,6 +12,27 @@ from flask import render_template, request
 # Routing for your application.
 ###
 
+@app.route ('/api/upload', methods=['POST'])
+def upload():
+    from= UploadForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        photo = form.photo.data
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        description = form.description.data 
+
+        result = [{
+            'message' : 'File Successfully Uploaded',
+            'filename' : filename ,
+            'Description' : description
+        }]
+
+        return jsonify (result= result)
+        error_retrieval = form_error(form)
+        error = [{'errors' : error_retrieval}]
+        return jsonify(errors=error)
+
 
 # Please create all new routes and view functions above this route.
 # This route is now our catch all route for our VueJS single page
